@@ -11,15 +11,12 @@ class Scroll extends React.Component {
 
 
   showList() {
-    const item = [];
-    for (let i = 0; i < this.list.length; i += 1) {
-      item[i] = this.list.splice(0);
-      item.push(<div key={i} className="list-item">{item[i]}</div>);
-    }
+    const listItems = this.list.map(number => <li>{number}</li>);
+
 
     return (
       <div className="list" >
-        {item}
+        {listItems}
       </div>
     );
   }
