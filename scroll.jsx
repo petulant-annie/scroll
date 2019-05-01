@@ -7,9 +7,31 @@ class Scroll extends React.Component {
   constructor(props) {
     super(props);
     this.list = props.list;
-    
+    this.state = {
+      element: this.createItem(),
+    };
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll() {
+    if (document.documentElement.clientHeight
+      + window.pageYOffset >= document.documentElement.scrollHeight) {
+      const element = this.state.element;
+      console.log(this.state.element);
+      for (let i = 0; i < 1; i += 1) {
+        element.push(this.createItem());
+      }
+      this.setState({ element });
+    }
+  }
 
   createButtons() {
     return (
@@ -30,13 +52,12 @@ class Scroll extends React.Component {
           {this.createButtons()}
         </div>
       ));
-
     return listItem;
   }
 
   render() {
     return (
-      this.createItem()
+      this.state.element
     );
   }
 }
