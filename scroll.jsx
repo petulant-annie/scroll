@@ -1,34 +1,35 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+const list = require('./list.json');
+
 class Scroll extends React.Component {
-  constructor() {
-    super();
-    this.list = document.getElementById('list');
+  constructor(props) {
+    super(props);
+    this.list = props.list;
   }
 
-  loadMore() {
-    const next = 1;
-    for (let i = 0; i < 20; i += 1) {
-      const item = document.createElement('li');
-      item.innerText = `'Item ' + ${next + 1}`;
-      this.list.appendChild(item);
-    }
-  }
 
   showList() {
-    return this.list.addEventListener('scroll', () => {
-      if (this.list.scrollTop + this.list.clientHeight >= this.list.scrollHeight) {
-        this.loadMore();
-      }
-    });
+    const listItems = this.list.map(number => <li>{number}</li>);
+
+
+    return (
+      <div id="list" >
+        {listItems}
+      </div>
+    );
   }
 
   render() {
     return (
-      <div id="list">{this.showList()}</div>
+      this.showList()
     );
   }
 }
 
-ReactDOM.render(<Scroll />, document.getElementById('root'));
+const scroll = (
+  <Scroll list={list} />
+);
+
+ReactDOM.render(scroll, document.getElementById('root'));
