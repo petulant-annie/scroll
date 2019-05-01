@@ -3,13 +3,13 @@
   padding: 0;
 }
 
-#listContainer {
+/* #listContainer {
   border: 10px solid grey;
   height: 300px;
   margin: 0 auto;
   overflow: auto;
   width: 200px;
-}
+} */
 
 li {
   padding: 10px;

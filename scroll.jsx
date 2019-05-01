@@ -7,11 +7,11 @@ class Scroll extends React.Component {
   constructor(props) {
     super(props);
     this.list = props.list;
-    this.listContainer = document.getElementById('listContainer');
+    this.lastScrollY = 0;
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', console.log('11'));
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
@@ -28,9 +28,16 @@ class Scroll extends React.Component {
     );
   }
 
+  handleScroll() {
+    this.lastScrollY = window.scrollY;
+    if (this.lastScrollY >= 30) {
+      this.showList();
+    }
+  }
+
   render() {
     return (
-      <div id="listContainer" >
+      <div id="listContainer" onScroll={this.handleScroll()} >
         {this.showList()}
       </div>
     );
