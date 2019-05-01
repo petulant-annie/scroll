@@ -7,35 +7,9 @@ class Scroll extends React.Component {
   constructor(props) {
     super(props);
     this.list = props.list;
-    this.state = {
-      // element: [],
-    };
-    // this.handleScroll = this.handleScroll.bind(this);
+    
   }
 
-  // componentDidMount() {
-  //   window.addEventListener('scroll', this.handleScroll);
-  // }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener('scroll', this.handleScroll);
-  // }
-
-  // handleScroll() {
-  //   if (document.documentElement.clientHeight
-  //     + window.pageYOffset >= document.documentElement.scrollHeight) {
-  //     const element = this.state.element;
-  //     for (let i = 0; i < 40; i += 1) {
-  //       element.push(<div className="li" key={this.state.element.length + 1}>
-  //         <img src={this.state.element.avatar} alt="ava" />
-  //         <p>{this.state.element.name}</p>
-  //         <p>{this.state.element.email}</p>
-  //         {this.createButtons()}
-  //       </div>);
-  //     }
-  //     this.setState({ element });
-  //   }
-  // }
 
   createButtons() {
     return (
@@ -47,9 +21,9 @@ class Scroll extends React.Component {
   }
 
   createItem() {
-    const listItem = this.list.map(item =>
+    const listItem = this.list.map((item, index) =>
       (
-        <div className="li">
+        <div key={index} className="li">
           <img src={item.avatar} alt="ava" />
           <p>{item.name}</p>
           <p>{item.email}</p>
@@ -57,10 +31,7 @@ class Scroll extends React.Component {
         </div>
       ));
 
-
-    return (
-      listItem
-    );
+    return listItem;
   }
 
   render() {
