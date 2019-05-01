@@ -3,18 +3,10 @@
   padding: 0;
 }
 
-/* #listContainer {
-  border: 10px solid grey;
-  height: 300px;
-  margin: 0 auto;
-  overflow: auto;
-  width: 200px;
-} */
-
-p {
+li {
   padding: 10px;
   list-style-type: none;
 }
-p:hover {
+li:hover {
   background: #ccc;
 }
