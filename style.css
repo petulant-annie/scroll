@@ -11,10 +11,10 @@
   width: 200px;
 } */
 
-li {
+p {
   padding: 10px;
   list-style-type: none;
 }
-li:hover {
+p:hover {
   background: #ccc;
 }
