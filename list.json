@@ -1,42 +1,38 @@
 [
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, id?",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit.1200020000"
+  {
+    "avatar": "http://chelseablues.ru/img/noavatar.png",
+    "name": "Jake",
+    "email": "some-email@i.ua",
+    "registration": "21.01.15"
+  },
+  {
+    "avatar": "http://chelseablues.ru/img/noavatar.png",
+    "name": "Joe",
+    "email": "test@i.ua",
+    "registration": "11.01.15"
+  },
+  {
+    "avatar": "http://chelseablues.ru/img/noavatar.png",
+    "name": "Lisa",
+    "email": "test-email@i.ua",
+    "registration": "23.01.15"
+  },
+  {
+    "avatar": "http://chelseablues.ru/img/noavatar.png",
+    "name": "Ralph",
+    "email": "some-test-email@i.ua",
+    "registration": "15.01.15"
+  },
+  {
+    "avatar": "http://chelseablues.ru/img/noavatar.png",
+    "name": "Sam",
+    "email": "great-email@i.ua",
+    "registration": "13.01.15"
+  },
+  {
+    "avatar": "http://chelseablues.ru/img/noavatar.png",
+    "name": "Max",
+    "email": "max-email@i.ua",
+    "registration": "31.01.15"
+  }
 ]
