@@ -7,10 +7,8 @@ class Scroll extends React.Component {
   constructor(props) {
     super(props);
     this.list = props.list;
-    this.item = this.list.map((item, index) => <li key={index}>{item}</li>);
-    this.lastScrollY = 0;
     this.state = {
-      element: this.item,
+      element: this.list.map((item, index) => <li className="li" key={index}>{item}</li>),
     };
     this.handleScroll = this.handleScroll.bind(this);
   }
@@ -24,11 +22,11 @@ class Scroll extends React.Component {
   }
 
   handleScroll() {
-    this.lastScrollY = window.scrollY;
-    if (this.lastScrollY >= 300) {
+    if (document.documentElement.clientHeight
+      + window.pageYOffset >= document.documentElement.scrollHeight) {
       const element = this.state.element;
-      for (let i = 0; i < 5; i += 1) {
-        element.push(<li key={this.state.element.length + i}>{this.item[i]}</li>);
+      for (let i = 0; i < 40; i += 1) {
+        element.push(<li key={this.state.element.length + 1}>{this.list[i]}</li>);
       }
       this.setState({ element });
     }
