@@ -7,23 +7,32 @@ class Scroll extends React.Component {
   constructor(props) {
     super(props);
     this.list = props.list;
+    this.listContainer = document.getElementById('listContainer');
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', console.log('11'));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
 
   showList() {
-    const listItems = this.list.map(number => <li>{number}</li>);
-
-
+    let listItems;
+    for (let i = 0; i < 20; i += 1) {
+      listItems = this.list.map(item => <li key={i}>{item}</li>);
+    }
     return (
-      <div id="list" >
-        {listItems}
-      </div>
+      listItems
     );
   }
 
   render() {
     return (
-      this.showList()
+      <div id="listContainer" >
+        {this.showList()}
+      </div>
     );
   }
 }
