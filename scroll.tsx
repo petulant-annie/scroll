@@ -17,45 +17,40 @@ interface IItem {
 class Scroll extends React.Component<IList> {
   containerRef: React.RefObject<HTMLDivElement>;
   list: JSX.Element[];
-  duplicateItem: any;
+  state: { duplicateItem: any; };
 
   constructor(props: IList) {
     super(props);
     this.list = props.list;
     this.containerRef = React.createRef();
-    this.duplicateItem = [];
+    this.state = {
+      duplicateItem: [],
+    };
   }
 
   handleScroll = (e: React.UIEvent) => {
-    e.preventDefault();
     const current = this.containerRef.current;
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
-      for (let i = 0; i < this.list.length; i += 1) {
-        this.duplicateItem.push(this.createItems[i]);
-      }
-      console.log(this.duplicateItem);
+      this.setState({ duplicateItem: this.state.duplicateItem.concat(this.createItems) });
     }
   }
 
-  createButtons() {
-    return (
-      <div className="button-bar">
-        <button>Add</button>
-        <button>Remove</button>
-      </div>
-    );
+  handleRemove = (e: any) => {
+    e.currentTarget.parentNode.remove();
   }
 
   createItems = (this.props.list as []).map((item: IItem, index: number) => (
-    <div key={index} className="li">
+    <div className="li">
       <img src={item.avatar} alt="ava" />
       <p>{item.name}</p>
       <p>{item.email}</p>
-      {this.createButtons()}
+      <button onClick={this.handleRemove}>Remove</button>
     </div>
   ));
 
   render() {
+    console.log(this.state.duplicateItem);
+
     return (
       <div
         className="listContainer"
@@ -63,7 +58,7 @@ class Scroll extends React.Component<IList> {
         ref={this.containerRef}
       >
         {this.createItems}
-        {this.duplicateItem}
+        {this.state.duplicateItem}
       </div>
     );
   }
