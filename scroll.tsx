@@ -17,24 +17,23 @@ interface IItem {
 class Scroll extends React.Component<IList> {
   containerRef: React.RefObject<HTMLDivElement>;
   list: JSX.Element[];
-  state: { duplicateItem: any };
+  duplicateItem: any;
 
   constructor(props: IList) {
     super(props);
     this.list = props.list;
     this.containerRef = React.createRef();
-    this.handleScroll = this.handleScroll.bind(this);
-    this.state = {
-      duplicateItem: [],
-    };
+    this.duplicateItem = [];
   }
 
   handleScroll = (e: React.UIEvent) => {
     e.preventDefault();
     const current = this.containerRef.current;
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
-      this.setState({ duplicateItem: this.createItems });
-      console.log(this.state.duplicateItem);
+      for (let i = 0; i < this.list.length; i += 1) {
+        this.duplicateItem.push(this.createItems[i]);
+      }
+      console.log(this.duplicateItem);
     }
   }
 
@@ -57,7 +56,6 @@ class Scroll extends React.Component<IList> {
   ));
 
   render() {
-    console.log(this.state.duplicateItem);
     return (
       <div
         className="listContainer"
@@ -65,7 +63,7 @@ class Scroll extends React.Component<IList> {
         ref={this.containerRef}
       >
         {this.createItems}
-        {this.state.duplicateItem}
+        {this.duplicateItem}
       </div>
     );
   }
