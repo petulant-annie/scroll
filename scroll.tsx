@@ -1,37 +1,25 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import faker from 'faker';
 
-import list from './list.json';
-
-interface IList {
-  list: JSX.Element[];
-}
-
-interface IItem {
-  avatar: string;
-  name: string;
-  email: string;
-  registration: number;
-}
-
-class Scroll extends React.Component<IList> {
+class Scroll extends React.Component {
   containerRef: React.RefObject<HTMLDivElement>;
   list: JSX.Element[];
-  state: { duplicateItem: any; };
+  state: { itemAmount: number };
 
-  constructor(props: IList) {
-    super(props);
-    this.list = props.list;
+  constructor() {
+    super();
+    this.list = [];
     this.containerRef = React.createRef();
     this.state = {
-      duplicateItem: [],
+      itemAmount: 5,
     };
   }
 
   handleScroll = (e: React.UIEvent) => {
     const current = this.containerRef.current;
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
-      this.setState({ duplicateItem: this.state.duplicateItem.concat(this.createItems) });
+      this.setState({ itemAmount: this.state.itemAmount += 1 });
     }
   }
 
@@ -39,33 +27,41 @@ class Scroll extends React.Component<IList> {
     e.currentTarget.parentNode.remove();
   }
 
-  createItems = (this.props.list as []).map((item: IItem, index: number) => (
-    <div className="li">
-      <img src={item.avatar} alt="ava" />
-      <p>{item.name}</p>
-      <p>{item.email}</p>
-      <button onClick={this.handleRemove}>Remove</button>
-    </div>
-  ));
+  item: any = (key: number) => {
+    return (
+      <div key={key} className="li">
+        <img src={faker.image.avatar()} alt="ava" />
+        <p>{faker.name.findName()}</p>
+        <p>{faker.internet.email()}</p>
+        <button onClick={this.handleRemove}>Remove</button>
+      </div>
+    );
+  }
+
+  createItems() {
+    this.list = [];
+    for (let i = 0; i < this.state.itemAmount; i += 1) {
+      this.list.push(this.item(this.list.length));
+    }
+
+    return this.list;
+  }
 
   render() {
-    console.log(this.state.duplicateItem);
-
     return (
       <div
         className="listContainer"
         onScroll={this.handleScroll}
         ref={this.containerRef}
       >
-        {this.createItems}
-        {this.state.duplicateItem}
+        {this.createItems()}
       </div>
     );
   }
 }
 
 const scroll = (
-  <Scroll list={list} />
+  <Scroll />
 );
 
 ReactDOM.render(scroll, document.getElementById('root'));
