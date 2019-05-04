@@ -1,47 +1,52 @@
 import * as React from 'react';
 import faker from 'faker';
 
-export interface IList {
-  listItems: () => JSX.Element[];
+export interface IItem {
+  load: () => void;
 }
 
-export default class List extends React.Component<IList> {
-  elem: JSX.Element[];
-  constructor(props: IList) {
+export default class List extends React.Component<IItem> {
+  load: () => void;
+  listElem: any;
+  constructor(props: IItem) {
     super(props);
-    this.elem = [];
-    this.createItems = this.props.listItems;
+    this.listElem = [];
   }
 
   handleRemove = (e: any) => {
     e.currentTarget.parentNode.remove();
   }
 
-  item: any = (key: number) => {
-    return (
-      <div key={key} className="li">
-        <img src={faker.image.avatar()} alt="ava" />
-        <p>{faker.name.findName()}</p>
-        <p>{faker.internet.email()}</p>
-        <button onClick={this.handleRemove}>Remove</button>
-      </div>
-    );
+  item(key: number) {
+    const avatar = faker.image.avatar();
+    const name = faker.name.findName();
+    const email = faker.internet.email();
+    this.listElem.push({ key, avatar, name, email });
   }
 
-  createItems() {
+  loadMore() {
     for (let i = 0; i < 5; i += 1) {
-      this.elem.push(this.item(this.elem.length));
+      this.item(this.listElem.length);
     }
-    console.log(this.elem);
-
-    return this.elem;
   }
 
   render() {
+    this.loadMore();
+    console.log(this.listElem);
+
+    const list = this.listElem.map((item: any) =>
+      (
+        <div key={item.key}  className="il">
+          <img src={item.avatar} alt="img" />
+          <p>{item.name}</p>
+          <p>{item.email}</p>
+          <button onClick={this.handleRemove}>Remove</button>
+        </div>));
+
     return (
-      <div>
-        {this.createItems()}
-      </div>
+      <List load={this.loadMore}>
+        {list}
+      </List>
     );
   }
 }

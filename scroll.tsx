@@ -1,50 +1,26 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import faker from 'faker';
 
-class Scroll extends React.Component {
+import List, { IItem } from './list';
+
+class Scroll extends React.Component<IItem> {
   containerRef: React.RefObject<HTMLDivElement>;
-  list: JSX.Element[];
-  state: { itemAmount: number };
-
-  constructor() {
-    super();
-    this.list = [];
+  state: { listItem: [] };
+  constructor(props: IItem) {
+    super(props);
     this.containerRef = React.createRef();
     this.state = {
-      itemAmount: 5,
+      listItem: [],
     };
   }
 
   handleScroll = (e: React.UIEvent) => {
     const current = this.containerRef.current;
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
-      this.setState({ itemAmount: this.state.itemAmount += 1 });
+      this.props.load;
+      console.log('123');
+      console.log(this.props.load);
     }
-  }
-
-  handleRemove = (e: any) => {
-    e.currentTarget.parentNode.remove();
-  }
-
-  item: any = (key: number) => {
-    return (
-      <div key={key} className="li">
-        <img src={faker.image.avatar()} alt="ava" />
-        <p>{faker.name.findName()}</p>
-        <p>{faker.internet.email()}</p>
-        <button onClick={this.handleRemove}>Remove</button>
-      </div>
-    );
-  }
-
-  createItems() {
-    this.list = [];
-    for (let i = 0; i < this.state.itemAmount; i += 1) {
-      this.list.push(this.item(this.list.length));
-    }
-
-    return this.list;
   }
 
   render() {
@@ -54,14 +30,14 @@ class Scroll extends React.Component {
         onScroll={this.handleScroll}
         ref={this.containerRef}
       >
-        {this.createItems()}
+        <List load={this.props.load} />
       </div>
     );
   }
 }
 
 const scroll = (
-  <Scroll />
+  <Scroll load={this.props.load} />
 );
 
 ReactDOM.render(scroll, document.getElementById('root'));
