@@ -18,10 +18,8 @@
   },
   "dependencies": {
     "@types/node": "^11.13.8",
-    "@types/uuid": "^3.4.4",
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "uuid": "^3.3.2"
+    "react-dom": "^16.7.0"
   }
 }

@@ -1,75 +1,51 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import uuidv1 from 'uuid/v1';
-
-import { list } from './list';
 
 interface IProps {
   list: Object[];
-  defaultOnPage: number;
+  loadMore: Object[];
 }
 
 interface IItem {
-  id: number;
+  key: number;
   avatar: string;
   name: string;
   email: string;
 }
 
-class Scroll extends React.Component<IProps> {
+export class Scroll extends React.Component<IProps> {
   containerRef: React.RefObject<HTMLDivElement>;
-  elemList: Object[];
-  state: { itemAmount: number };
 
   constructor(props: IProps) {
     super(props);
-    this.elemList = [];
     this.containerRef = React.createRef();
-    this.state = {
-      itemAmount: this.props.defaultOnPage,
-    };
   }
 
   handleScroll = () => {
     const current = this.containerRef.current;
 
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
-      this.setState({ itemAmount: this.state.itemAmount += 1 });
+      this.props.loadMore;
+      console.log('end');
     }
   }
 
-  handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const position = e.currentTarget.getAttribute('data-id');
-    const item = this.elemList.find(item => `${item.id}` === position);
-
-    this.elemList.splice(this.elemList.indexOf(item), 1);
-    this.setState({ itemAmount: this.state.itemAmount -= 1 });
-  }
-
-  createItems() {
-    for (let i = this.elemList.length; i < this.state.itemAmount; i += 1) {
-      if (this.props.list[i]) {
-        this.elemList.push(this.props.list[this.elemList.length]);
-      } else {
-        this.elemList.push(
-          { id: this.elemList.length });
-      }
-    }
+  handleRemove = (e: any) => {
+    e.currentTarget.parentNode.remove();
   }
 
   render() {
-    this.createItems();
-
-    const list = this.elemList.map((item: IItem) => {
+    const list = this.props.list.map((item: IItem) => {
       return (
-        <div key={item.id} className="li">
+        <div key={item.key} className="li">
           <img src={item.avatar} alt="ava" />
           <p>{item.name}</p>
           <p>{item.email}</p>
-          <button onClick={this.handleRemove} data-id={item.id}>Remove</button>
+          <button onClick={this.handleRemove} data-key={item.key}>Remove</button>
         </div>);
     },
     );
+
+    console.log(list);
 
     return (
       <div
@@ -82,9 +58,3 @@ class Scroll extends React.Component<IProps> {
     );
   }
 }
-
-const scroll = (
-  <Scroll defaultOnPage={5} list={list.getCards()} />
-);
-
-ReactDOM.render(scroll, document.getElementById('root'));
