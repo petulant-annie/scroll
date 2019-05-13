@@ -1,52 +1,35 @@
-import * as React from 'react';
 import faker from 'faker';
+import uuidv1 from 'uuid/v1';
 
-export interface IItem {
-  load: () => void;
-}
+class List {
+  list: Object[];
+  amount: number;
 
-export default class List extends React.Component<IItem> {
-  load: () => void;
-  listElem: any;
-  constructor(props: IItem) {
-    super(props);
-    this.listElem = [];
+  constructor(amount: number) {
+    this.amount = amount;
+    this.list = [];
   }
 
-  handleRemove = (e: any) => {
-    e.currentTarget.parentNode.remove();
-  }
-
-  item(key: number) {
+  item = () => {
     const avatar = faker.image.avatar();
     const name = faker.name.findName();
     const email = faker.internet.email();
-    this.listElem.push({ key, avatar, name, email });
+    const id = uuidv1();
+
+    return ({ id, avatar, name, email });
   }
 
-  loadMore() {
-    for (let i = 0; i < 5; i += 1) {
-      this.item(this.listElem.length);
+  createItems() {
+    for (let i = 0; i < this.amount; i += 1) {
+      this.list.push(this.item());
     }
   }
 
-  render() {
-    this.loadMore();
-    console.log(this.listElem);
+  getCards() {
+    this.createItems();
 
-    const list = this.listElem.map((item: any) =>
-      (
-        <div key={item.key}  className="il">
-          <img src={item.avatar} alt="img" />
-          <p>{item.name}</p>
-          <p>{item.email}</p>
-          <button onClick={this.handleRemove}>Remove</button>
-        </div>));
-
-    return (
-      <List load={this.loadMore}>
-        {list}
-      </List>
-    );
+    return this.list;
   }
 }
+
+export const list = new List(300);
