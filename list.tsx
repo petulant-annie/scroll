@@ -14,15 +14,13 @@ interface IProps {
 export default class List extends React.Component<IProps> {
   list: Object[];
   state: {
-    list: Object[],
-    isLoad: boolean,
+    list: Object[]
   };
 
   constructor(amount: IProps) {
     super(amount);
     this.state = {
-      isLoad: true,
-      list: [],
+      list: []
     };
   }
 
@@ -36,25 +34,14 @@ export default class List extends React.Component<IProps> {
   }
 
   createItems = async () => {
-    if (this.state.isLoad) {
-      await new Promise((res: any) => setTimeout(res, 2000));
       for (let i = 0; i < this.props.amount; i += 1) {
-        await this.setState(prevState =>
+        this.setState(prevState =>
           ({ list: prevState.list.concat(this.item()), isLoad: false }));
       }
-    }
-  }
-
-  isLoad = () => {
-    this.setState({ ...this.state, isLoad: true });
   }
 
   componentDidMount() {
     this.createItems();
-  }
-
-  componentWillUpdate() {
-    this.isLoad;
   }
 
   render() {
