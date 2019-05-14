@@ -19,7 +19,6 @@ class List extends React.Component<IProps> {
       itemAmount: this.props.amount,
       list: [],
     };
-    // this.list = [];
   }
 
   item = () => {
@@ -33,11 +32,8 @@ class List extends React.Component<IProps> {
 
   createItems() {
     for (let i = 0; i < this.props.amount; i += 1) {
-      this.setState({ list: this.state.list.concat(this.item()) });
+      this.setState((prevState, _) => ({ list: prevState.list.concat(this.item()) }));
     }
-
-    console.log('ll');
-    console.log(this.state.list);
   }
 
   getCards = () => {
@@ -45,14 +41,16 @@ class List extends React.Component<IProps> {
   }
 
   render() {
+    this.getCards;
 
     console.log(this.state.list);
 
     return (
+      <div><button onClick={this.getCards}>CLICK</button>
       <Scroll
         list={this.state.list}
         loadMore={this.getCards}
-      />
+      /></div>
     );
   }
 
