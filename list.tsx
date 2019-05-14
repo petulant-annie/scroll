@@ -11,7 +11,7 @@ interface IProps {
 
 class List extends React.Component<IProps> {
   list: Object[];
-  state: { itemAmount: number, list: any };
+  state: { itemAmount: number, list: Object[] };
 
   constructor(amount: IProps) {
     super(amount);
@@ -30,27 +30,22 @@ class List extends React.Component<IProps> {
     return ({ key, avatar, name, email });
   }
 
-  createItems() {
+  createItems = () => {
     for (let i = 0; i < this.props.amount; i += 1) {
       this.setState((prevState, _) => ({ list: prevState.list.concat(this.item()) }));
     }
   }
 
-  getCards = () => {
+  componentDidMount() {
     this.createItems();
   }
 
   render() {
-    this.getCards;
-
-    console.log(this.state.list);
-
     return (
-      <div><button onClick={this.getCards}>CLICK</button>
-      <Scroll
-        list={this.state.list}
-        loadMore={this.getCards}
-      /></div>
+        <Scroll
+          list={this.state.list}
+          loadMore={this.createItems}
+        />
     );
   }
 

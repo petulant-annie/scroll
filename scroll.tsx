@@ -20,14 +20,11 @@ export class Scroll extends React.Component<IProps> {
     this.containerRef = React.createRef();
   }
 
-  handleScroll = (e: any) => {
-    e.preventDefault;
+  handleScroll = () => {
     const current = this.containerRef.current;
 
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
-      this.props.loadMore;
-      console.log(this.props.loadMore);
-      console.log('end');
+      this.props.loadMore();
     }
   }
 
