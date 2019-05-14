@@ -36,18 +36,25 @@ export default class List extends React.Component<IProps> {
   }
 
   createItems = async () => {
-    await new Promise((res: any) => setTimeout(res, 2000));
     if (this.state.isLoad) {
+      await new Promise((res: any) => setTimeout(res, 2000));
       for (let i = 0; i < this.props.amount; i += 1) {
         await this.setState(prevState =>
           ({ list: prevState.list.concat(this.item()), isLoad: false }));
-        await this.setState({ isLoad: true });
       }
     }
   }
 
+  isLoad = () => {
+    this.setState({ ...this.state, isLoad: true });
+  }
+
   componentDidMount() {
     this.createItems();
+  }
+
+  componentWillUpdate() {
+    this.isLoad;
   }
 
   render() {
