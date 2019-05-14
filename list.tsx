@@ -9,7 +9,7 @@ interface IProps {
   amount: number;
 }
 
-class List extends React.Component<IProps> {
+export default class List extends React.Component<IProps> {
   list: Object[];
   state: { itemAmount: number, list: Object[] };
 
@@ -32,7 +32,7 @@ class List extends React.Component<IProps> {
 
   createItems = () => {
     for (let i = 0; i < this.props.amount; i += 1) {
-      this.setState((prevState, _) => ({ list: prevState.list.concat(this.item()) }));
+      this.setState(prevState => ({ list: prevState.list.concat(this.item()) }));
     }
   }
 
@@ -42,13 +42,10 @@ class List extends React.Component<IProps> {
 
   render() {
     return (
-        <Scroll
-          list={this.state.list}
-          loadMore={this.createItems}
-        />
+      <Scroll
+        list={this.state.list}
+        loadMore={this.createItems}
+      />
     );
   }
-
 }
-
-ReactDOM.render(<List amount={5} />, document.getElementById('root'));
