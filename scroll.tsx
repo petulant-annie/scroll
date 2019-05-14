@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface IProps {
   list: Object[];
-  loadMore: Object[];
+  loadMore: any;
 }
 
 interface IItem {
@@ -20,11 +20,13 @@ export class Scroll extends React.Component<IProps> {
     this.containerRef = React.createRef();
   }
 
-  handleScroll = () => {
+  handleScroll = (e: any) => {
+    e.preventDefault;
     const current = this.containerRef.current;
 
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
       this.props.loadMore;
+      console.log(this.props.loadMore);
       console.log('end');
     }
   }
@@ -44,8 +46,6 @@ export class Scroll extends React.Component<IProps> {
         </div>);
     },
     );
-
-    console.log(list);
 
     return (
       <div
