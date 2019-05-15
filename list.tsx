@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import faker from 'faker';
 import uuidv1 from 'uuid/v1';
 
@@ -8,19 +7,21 @@ const Promise = window.Promise;
 import { Scroll } from './scroll';
 
 interface IProps {
-  amount: number;
+  defaultOnPage: number;
 }
 
 export default class List extends React.Component<IProps> {
   list: Object[];
   state: {
-    list: Object[]
+    list: Object[],
+    isLoad: boolean,
   };
 
-  constructor(amount: IProps) {
-    super(amount);
+  constructor(props: IProps) {
+    super(props);
     this.state = {
-      list: []
+      isLoad: true,
+      list: [],
     };
   }
 
@@ -34,10 +35,15 @@ export default class List extends React.Component<IProps> {
   }
 
   createItems = async () => {
-      for (let i = 0; i < this.props.amount; i += 1) {
-        this.setState(prevState =>
-          ({ list: prevState.list.concat(this.item()), isLoad: false }));
+    if (this.state.isLoad) {
+      await this.setState(prevState =>
+        ({ list: prevState.list, isLoad: false }));
+      await new Promise((res: any) => setTimeout(res, 2000));
+      for (let i = 0; i < this.props.defaultOnPage; i += 1) {
+        await this.setState(prevState =>
+          ({ list: prevState.list.concat(this.item()), isLoad: true }));
       }
+    }
   }
 
   componentDidMount() {

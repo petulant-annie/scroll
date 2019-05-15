@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface IProps {
   list: Object[];
-  loadMore: any;
+  loadMore: () => void;
 }
 
 interface IItem {

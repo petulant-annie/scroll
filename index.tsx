@@ -3,4 +3,4 @@ import * as ReactDOM from 'react-dom';
 
 import List from './list';
 
-ReactDOM.render(<List amount={5} />, document.getElementById('root'));
+ReactDOM.render(<List defaultOnPage={5} />, document.getElementById('root'));
