@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+import { MyLoader } from './contentLoader';
+import './style.sass';
+
 interface IProps {
   list: Object[];
   loadMore: () => void;
@@ -36,10 +39,17 @@ export class Scroll extends React.Component<IProps> {
     const list = this.props.list.map((item: IItem) => {
       return (
         <div key={item.key} className="li">
-          <img src={item.avatar} alt="ava" />
-          <p>{item.name}</p>
-          <p>{item.email}</p>
-          <button onClick={this.handleRemove} data-key={item.key}>Remove</button>
+          <div className="avatar"><img src={item.avatar} alt="ava" /></div>
+          <div className="item-container">
+            <div className="item-name">{item.name}</div>
+            <div className="item-email">{item.email}</div>
+            <button
+              data-key={item.key}
+              className="remove-button"
+              onClick={this.handleRemove}
+            >Remove
+            </button>
+          </div>
         </div>);
     },
     );
@@ -51,6 +61,7 @@ export class Scroll extends React.Component<IProps> {
         ref={this.containerRef}
       >
         {list}
+        <MyLoader />
       </div>
     );
   }
