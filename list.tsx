@@ -58,8 +58,7 @@ export default class List extends React.Component<IProps> {
   }
 
   componentDidMount() {
-    this.createItems();
-    // this.checkScroll();
+    this.checkScroll();
   }
 
   componentDidUpdate() {
