@@ -6,45 +6,50 @@ body
   box-sizing: border-box
 
 .listContainer
-  background: #F5F5F5
   font-family: 'Muli', sans-serif
   height: 100vh
   margin: 0 auto
+  max-width: 700px
   overflow: auto
-  width: 50vw
-
-.avatar
-  display: inline-block
-  margin: 10px
-
-.item-container
-  display: inline-block
-  margin: 10px
-  padding-top: 0
-
-.item-name
-  font-weight: 800
 
 .li
   background: white
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, .3)
+  border-radius: 5px
+  display: block
   margin: 10px
+  max-height: 150px
 
 .li:hover
   background: #ccc
 
+.li::after
+  clear: both
+  content: ''
+  display: block
+
+.avatar
+  display: inline-block
+  margin: 10px
+  float: left
+
+.item-container
+  display: inline-block
+  margin: 10px
+  padding-top: 10px
+
+.item-name
+  font-weight: 800
+
 .remove-button
-  border: 1px solid gray
-  border-radius: 5px
+  background-color: transparent
+  border: none
   box-sizing: border-box
   color: gray
   cursor: pointer
-  font-size: 12px
-  margin: 5px
+  margin: 10px 0
   outline: none
   padding: 5px 10px
 
 .remove-button:hover
-  background: #ccc
-  border: 1px solid white
-  color: white
 

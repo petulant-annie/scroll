@@ -14,13 +14,13 @@ export default class List extends React.Component<IProps> {
   list: Object[];
   state: {
     list: Object[],
-    isLoad: boolean,
+    isLoading: boolean,
   };
 
   constructor(props: IProps) {
     super(props);
     this.state = {
-      isLoad: true,
+      isLoading: true,
       list: [],
     };
   }
@@ -35,13 +35,13 @@ export default class List extends React.Component<IProps> {
   }
 
   createItems = async () => {
-    if (this.state.isLoad) {
+    if (this.state.isLoading) {
       await this.setState(prevState =>
-        ({ list: prevState.list, isLoad: false }));
+        ({ list: prevState.list, isLoading: false }));
       await new Promise((res: any) => setTimeout(res, 2000));
       for (let i = 0; i < this.props.defaultOnPage; i += 1) {
         await this.setState(prevState =>
-          ({ list: prevState.list.concat(this.item()), isLoad: true }));
+          ({ list: prevState.list.concat(this.item()), isLoading: true }));
       }
     }
   }
@@ -53,6 +53,7 @@ export default class List extends React.Component<IProps> {
   render() {
     return (
       <Scroll
+        isLoading={this.state.isLoading}
         list={this.state.list}
         loadMore={this.createItems}
       />

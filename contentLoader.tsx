@@ -3,15 +3,45 @@ import ContentLoader from 'react-content-loader';
 
 export const MyLoader = () => (
   <ContentLoader
-    height={160}
-    width={500}
-    speed={3}
-    primaryColor="#f3f3f3"
-    secondaryColor="#d4d6d6"
+    className="li"
+    height={150}
+    width={700}
+    speed={2}
+    primaryColor="#F5F5F5"
+    secondaryColor="#E0E0E0"
+    preserveAspectRatio="xMidYMid slice"
   >
-    <rect x="9" y="16" rx="4" ry="4" width="105" height="75" />
-    <rect x="128" y="18" rx="3" ry="3" width="160" height="10" />
-    <rect x="127" y="40" rx="3" ry="3" width="220" height="10" />
-    <rect x="126" y="60" rx="3" ry="3" width="70" height="30" />
+    <rect
+      x="10"
+      y="10"
+      rx="1"
+      ry="1"
+      width="130"
+      height="130"
+    />
+    <rect
+      x="170"
+      y="18"
+      rx="2"
+      ry="2"
+      width="160"
+      height="10"
+    />
+    <rect
+      x="170"
+      y="40"
+      rx="2"
+      ry="2"
+      width="220"
+      height="10"
+    />
+    <rect
+      x="170"
+      y="65"
+      rx="5"
+      ry="5"
+      width="25"
+      height="25"
+    />
   </ContentLoader>
 );
