@@ -37,32 +37,40 @@ export default class List extends React.Component<IProps> {
   }
 
   createItems = async () => {
+    const listItems: Object[] = [];
+
+    for (let i = 0; i < this.props.defaultOnPage; i += 1) {
+      listItems.push(this.item());
+    }
+
     if (this.state.isLoading) {
       await this.setState(prevState =>
         ({ list: prevState.list, isLoading: false }));
       await new Promise((res: any) => setTimeout(res, 2000));
-      for (let i = 0; i < this.props.defaultOnPage; i += 1) {
-        await this.setState(prevState =>
-          ({ list: prevState.list.concat(this.item()), isLoading: true }));
-      }
+      await this.setState(prevState =>
+        ({ list: prevState.list.concat(listItems), isLoading: true }));
     }
+
   }
 
   checkScroll = () => {
     const current = this.containerRef.current;
     if (current.scrollHeight === current.clientHeight) {
       this.createItems();
-      console.log(current.clientHeight);
-      console.log(current.scrollHeight);
     }
   }
 
   componentDidMount() {
     this.checkScroll();
+    window.addEventListener('resize', this.checkScroll);
   }
 
   componentDidUpdate() {
     this.checkScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.checkScroll);
   }
 
   render() {
