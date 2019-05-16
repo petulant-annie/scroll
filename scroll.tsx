@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MyLoader } from './contentLoader';
-import trashCan from './assets/icons/trash-can.svg';
+import SvgTrash from './svg-trash';
 import './style.sass';
 
 interface IProps {
@@ -54,7 +54,7 @@ export class Scroll extends React.Component<IProps> {
               className="remove-button"
               onClick={this.handleRemove}
             >
-              <img src={trashCan} />
+              <SvgTrash fill={'#9E9E9E'} />
             </button>
           </div>
         </div>);

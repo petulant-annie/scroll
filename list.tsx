@@ -48,13 +48,19 @@ export default class List extends React.Component<IProps> {
     }
   }
 
+  checkScroll = () => {
+    const current = this.containerRef.current;
+    if (current.clientHeight > 0) {
+      this.createItems();
+    }
+  }
+
   componentDidMount() {
     this.createItems();
-    const current = this.containerRef.current;
-    if (current.scrollHeight > 0) {
-      this.createItems();
-      console.log('wtf');
-    }
+  }
+
+  componentDidUpdate() {
+    // this.checkScroll();
   }
 
   render() {
