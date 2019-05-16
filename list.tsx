@@ -51,7 +51,7 @@ export default class List extends React.Component<IProps> {
   componentDidMount() {
     this.createItems();
     const current = this.containerRef.current;
-    if (current.scrollHeight < current.clientHeight) {
+    if (current.scrollHeight > 0) {
       this.createItems();
       console.log('wtf');
     }
