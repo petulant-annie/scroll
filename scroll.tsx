@@ -7,6 +7,7 @@ interface IProps {
   list: Object[];
   isLoading: boolean;
   loadMore: () => void;
+  containerRef: React.RefObject<HTMLDivElement>;
 }
 
 interface IItem {
@@ -17,19 +18,17 @@ interface IItem {
 }
 
 export class Scroll extends React.Component<IProps> {
-  containerRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: IProps) {
     super(props);
-    this.containerRef = React.createRef();
   }
 
   handleScroll = () => {
-    const current = this.containerRef.current;
+    const current = this.props.containerRef.current;
 
     if (current.clientHeight + current.scrollTop >= current.scrollHeight) {
       this.props.loadMore();
-    } else if (current.scrollHeight < 0) { this.props.loadMore(); }
+    }
   }
 
   handleRemove = (e: any) => {
@@ -66,7 +65,7 @@ export class Scroll extends React.Component<IProps> {
       <div
         className="listContainer"
         onScroll={this.handleScroll}
-        ref={this.containerRef}
+        ref={this.props.containerRef}
       >
         {list}
         <div style={loaderStyle()}>

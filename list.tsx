@@ -16,6 +16,7 @@ export default class List extends React.Component<IProps> {
     list: Object[],
     isLoading: boolean,
   };
+  containerRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: IProps) {
     super(props);
@@ -23,6 +24,7 @@ export default class List extends React.Component<IProps> {
       isLoading: true,
       list: [],
     };
+    this.containerRef = React.createRef();
   }
 
   item = () => {
@@ -48,6 +50,11 @@ export default class List extends React.Component<IProps> {
 
   componentDidMount() {
     this.createItems();
+    const current = this.containerRef.current;
+    if (current.scrollHeight < current.clientHeight) {
+      this.createItems();
+      console.log('wtf');
+    }
   }
 
   render() {
@@ -56,6 +63,7 @@ export default class List extends React.Component<IProps> {
         isLoading={this.state.isLoading}
         list={this.state.list}
         loadMore={this.createItems}
+        containerRef={this.containerRef}
       />
     );
   }
